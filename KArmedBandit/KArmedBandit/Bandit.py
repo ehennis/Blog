@@ -36,8 +36,22 @@ class Bandit(object):
         #Set new reward (r1 + r2 ... ra)/ka
         current_total = self.estimate_values[arm]
         #(k-1/k)* current_total + (1/k) * reward
+        #self.estimate_values[arm] = ((k-1) / float(k)) * current_total + (1/float(k)) * reward
+        self.update_est(arm, k, current_total, reward)
+    
+    def update_est(self, arm, k, current_total, reward):
         self.estimate_values[arm] = ((k-1) / float(k)) * current_total + (1/float(k)) * reward
 
     def best_action(self, arm):
         return self.optimal_action == arm
 
+class OptimisticValueBandit(Bandit):
+    """k-armed bandit with Optimistic Value initialization"""
+    def __init__(self, arms, epsilon, initial):
+        super().__init__(arms, epsilon)
+        self.estimate_values[:] = initial #Set initial value
+        self.step_size = 0.1 #Set alpha to 0.1
+
+    def update_est(self, arm, k, current_total, reward):
+        self.estimate_values[arm] += self.step_size * (reward - current_total)
+        
