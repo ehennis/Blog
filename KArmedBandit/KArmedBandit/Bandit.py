@@ -26,10 +26,6 @@ class Bandit(object):
         reward = np.random.normal(self.q_star[arm],math.sqrt(1)) 
         return reward
 
-    def get_average_reward(self):
-        # Grab the max value from the arms
-        return np.max(self.estimate_values)
-
     def update_estimate_values(self, arm, reward):
         self.K[arm] += 1
         k = self.K[arm]

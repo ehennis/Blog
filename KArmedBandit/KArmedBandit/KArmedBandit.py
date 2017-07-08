@@ -6,22 +6,21 @@ from Bandit import *
 
 def process_bandit(epsilon, bandit_count, plays):
     optimal_action = np.zeros(plays)
-    average_reward = np.zeros(plays)
+    average_rewards = np.zeros( (bandit_count*plays) ).reshape(bandit_count,plays)
     for n in range(bandit_count):
         bandit = Bandit(10,epsilon)
         for play in range(plays):
             arm = bandit.get_arm() #Get arm to pull
             reward = bandit.get_reward(arm) #Calculate Reward
             bandit.update_estimate_values(arm,reward) #Update estimate values
-            avg_r = bandit.get_average_reward() #Find max reward
-            average_reward[play] += avg_r
+            average_rewards[n][play] += reward
             if bandit.best_action(arm):
                 optimal_action[play] += 1
         if n > 0 and n % 100 == 0:
             print("Loop: ",n)
     optimal_action /= bandit_count
-    average_reward /= bandit_count
-    return optimal_action, average_reward
+    average_rewards = np.mean(average_rewards,axis=0)
+    return optimal_action, average_rewards
 
 
 def kArmedEpsilonGreedy():
@@ -94,5 +93,5 @@ def OptimisticGreedy():
 
 
 if __name__ == "__main__":
-    #kArmedEpsilonGreedy()
-    OptimisticGreedy()
+    kArmedEpsilonGreedy()
+    #OptimisticGreedy()
