@@ -260,3 +260,9 @@ paket-files/
 __pycache__/
 *.pyc
 /DQN
+/ImageRecon/ImageRecon/bottlenecks
+/ImageRecon/ImageRecon/retrained_graph.pb
+/ImageRecon/ImageRecon/retrained_labels.txt
+/ImageRecon/ImageRecon/inception
+/ImageRecon/ImageRecon/tf_files
+/ImageRecon/ImageRecon/training_summaries/basics
