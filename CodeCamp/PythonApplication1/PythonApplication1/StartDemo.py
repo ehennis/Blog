@@ -7,5 +7,11 @@ for i in range(100):
     env.render()
 
 
+#TODO
+#   Install Gym on laptop
+#   Run code WITHOUT trained agent
+#   Run trained agent
+
+
 
 
