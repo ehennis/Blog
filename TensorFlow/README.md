@@ -12,3 +12,4 @@ This is the repository where I am doing all of my work in TensorFlow. There are 
   
 **TensorFlow version 2**  
 [MonteCarloBlackScholes-TF2.ipynb](MonteCarloBlackScholes-TF2.ipynb): Converting my Monte Carlo project to TensorFlow v2.  
+[DDQN-TFv2.ipynb](DDQN-TFv2.ipynb): Converted my DDQN notebook to TensorFlow v2.  
