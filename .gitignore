@@ -4,6 +4,7 @@
 BlackScholes/.ipynb_checkpoints/
 TensorFlow/.ipynb_checkpoints
 YouTube/.ipynb_checkpoints
+RaspberryPi/*
 
 # User-specific files
 *.suo
