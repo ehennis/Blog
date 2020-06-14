@@ -5,6 +5,8 @@ BlackScholes/.ipynb_checkpoints/
 TensorFlow/.ipynb_checkpoints
 YouTube/.ipynb_checkpoints
 RaspberryPi/*
+ImageDetection/PiDesktop.jpg
+ImageDetection/*mp4
 
 # User-specific files
 *.suo
