@@ -16,6 +16,7 @@ def main():
     model = True
     camera = PiCameraManager()
     camera.Start()
+    camera.Preview()
     model = MobileNetV2Base()
     
     while not camera.stopped:

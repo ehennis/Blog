@@ -34,6 +34,13 @@ class PiCameraManager(object):
         #Create frame
         self.frame = None
 
+    def Preview(self):
+        pos_x = 100
+        pos_y = 100
+        size_x = 300
+        size_y = 400
+        self.camera.start_preview(fullscreen=False,window=(pos_x,pos_y,size_x,size_y))
+        
     def Start(self):
         self.stopped = False
         Thread(target=self.StartCamera, args=()).start()
