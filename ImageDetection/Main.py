@@ -11,18 +11,21 @@
 """
 from PiCameraManager import PiCameraManager
 from MobileNetV2Base import MobileNetV2Base
+from MobileNetV2TFLite import MobileNetV2TFLite
 
 def main():
     model = True
     camera = PiCameraManager()
     camera.Start()
     camera.Preview()
-    model = MobileNetV2Base()
+    #model = MobileNetV2Base()
+    tflite_model = MobileNetV2TFLite()
     
     while not camera.stopped:
         if camera.frame is not None:
             frame = camera.Read()
-            prediction = model.Predict(frame)
+            #prediction = model.Predict(frame)
+            prediction = tflite_model.Predict(frame)
             print(prediction)
             #camera.Stop()
 

@@ -26,7 +26,8 @@ class PiCameraManager(object):
         self.camera.framerate = 24
         self.camera.vflip = True
         self.camera.hflip = True
-        self.camera.rotation = 270
+        # I need this to be right side up
+        self.camera.rotation = 540
         self.data_container = PiRGBArray(self.camera, size=(320,240))
 
         self.stream = self.camera.capture_continuous(self.data_container, format="bgr", use_video_port=True)
