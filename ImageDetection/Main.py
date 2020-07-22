@@ -12,6 +12,7 @@
 from PiCameraManager import PiCameraManager
 from MobileNetV2Base import MobileNetV2Base
 from MobileNetV2TFLite import MobileNetV2TFLite
+from PredictionResult import PredictionResult
 
 def main():
     model = True
@@ -26,7 +27,12 @@ def main():
             frame = camera.Read()
             #prediction = model.Predict(frame)
             prediction = tflite_model.Predict(frame)
-            print(prediction)
+            pred = PredictionResult(prediction)
+
+            print('%s: %s %s: %s' %
+                  (pred.PrimaryName,pred.PrimaryScore,
+                   pred.SecondaryName, pred.SecondaryScore))
+            
             #camera.Stop()
 
     print('Finished')
