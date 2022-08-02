@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Using Deep Learning to Predict Basketball Scores</title>
+</head>
+<!-- Load TensorFlow.JS-->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.4/dist/tf.min.js"></script>
+<!-- Load the Model Script-->
+<script src="include/LoadModel.js"></script>
+<!-- Load Team Information -->
+<script src="include/Teams.js"></script>
+
+<script>
+    
+
+    window.onload = function(){
+        //Load the conference drop down
+        var select = document.getElementById("ddvis");
+        var selHome = document.getElementById("ddhome");
+        for( i = 0; i < conf.length; i++){
+            var option = document.createElement('option');
+            var optionH = document.createElement('option');
+            option.text = option.value = optionH.text = optionH.value = conf[i];
+            select.add(option);
+            selHome.add(optionH);
+        }
+
+        var wins = document.getElementsByClassName("game-win").length;
+        var loss = document.getElementsByClassName("game-loss").length;
+        var total = wins / (wins + loss);
+        var total = (total * 100).toFixed(2);
+        
+        document.getElementById("cum-res").innerHTML = "2019 Total: " + wins + " wins and " + loss +" losses (" + total+"%)"; 
+    }
+
+    function confOnChange(isVisitor){
+        var ddid = 'ddhome';
+        var ddteam = 'ddTeamHome';
+        if( isVisitor ){
+            ddid = 'ddvis';
+            ddteam = 'ddTeamVis';
+        }
+        var sel = document.getElementById(ddid);
+        var selteam = document.getElementById(ddteam);
+        //Clear items (brute force)
+        selteam.innerHTML = "";
+        //Add 'Select Team' option
+        var optselect = document.createElement('option');
+        optselect.text = 'Select Team';
+        selteam.add(optselect);
+
+        var idx = sel.selectedIndex;
+        var val = sel.options[sel.selectedIndex].value;
+        for( var key in teamDict){
+            var confval = teamDict[key];
+            if( val == confval){
+                var option = document.createElement('option');
+                option.text = option.value = key;
+                selteam.add(option);
+            }
+        }
+    }
+
+    function runModel(){
+        var home_off = 0;
+        var home_def = 0;
+        var away_off = 0;
+        var away_def = 0;
+        var selVis = document.getElementById('ddTeamVis');
+        var selHom = document.getElementById('ddTeamHome');
+        if( selVis.selectedIndex <= 0 || selHom.selectedIndex <= 0){
+            alert("You need to select both teams!");
+            return;
+        }
+        var vis_team = selVis.options[selVis.selectedIndex].value;
+        var home_team = selHom.options[selHom.selectedIndex].value;
+        //Loop through current_stats
+        //team_name, home_off, home_def, home_def_delta, away_off, away_def, away_def_delta
+        for(var idx = 0; idx < current_stats.length; idx++){
+            var tm = current_stats[idx][0]
+            if( tm == vis_team){
+                away_off = current_stats[idx][3];
+                away_def = current_stats[idx][4];
+            }
+            if( tm == home_team){
+                home_off = current_stats[idx][1];
+                home_def = current_stats[idx][2];
+            }
+        }
+        document.getElementById("divStats").innerHTML = "<b>Data:</b><br />"+
+        home_team + " Home Scoring: " + home_off + "<br />"+
+        home_team + " Home Defense: " + home_def + "<br />"+
+        "<br />" +
+        vis_team + " Away Scoring: " + away_off + "<br />"+
+        vis_team + " Away Defense: " + away_def + "<br />"+
+        getResults(home_off, home_def, away_off, away_def);
+    }
+    
+</script>
+
+<style>
+.center-main{
+    margin:auto;
+    width: 60%;
+}
+.center {
+    margin:auto;
+    border: 0;
+    text-align: center;
+}
+.center-left {
+    margin:auto;
+    border: 0;
+    text-align: left;
+}
+</style>
+<body>
+    <div class="center-main">
+        <div class="center">
+        <h2>Welcome to Using Deep Learning to Predict Basketball Scores</h2>
+        </div>
+        <hr />
+        <div id="divModelStatus" class="center">Model Loading.....</div>
+        <br />
+        <b>Select Visiting Team:</b>&nbsp;<select id="ddvis" name="ddvis" onchange="confOnChange(true);"></select>&nbsp;
+            <select id="ddTeamVis" name="ddTeamVis"></select>
+        <br />
+        <b>Select Home Team:</b>&nbsp;<select id="ddhome" name="ddhome" onchange="confOnChange(false);"></select>&nbsp;
+            <select id="ddTeamHome" name="ddTeamHome"></select>
+        <br />
+        <input type="button" onclick="runModel();" value="Get Prediction" />&nbsp;&nbsp;
+        Results:
+        <div id="divResults" style="display: inline-block"></div>
+        <br /><br />
+        <div id="divStats" class="center-left"></div>
+        <br /><br />        
+    </div>
+</body>
+</html>
