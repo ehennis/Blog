@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txtResults;
 
     private HashMap<String,String> teamStats;
-    private static String TFLiteModelFilename = "deeplearning-manning.tflite";
+    private static String TFLiteModelFilename = "deeplearning-gdgsuncoast.tflite";
     private File TFLiteModel;
 
     @Override
