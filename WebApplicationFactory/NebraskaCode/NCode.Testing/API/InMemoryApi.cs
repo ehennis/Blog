@@ -18,11 +18,11 @@ namespace IaDnug.Testing.API
 {
     public class InMemoryApi : IDisposable
     {
-        private WebApplicationFactory<Startup> appFactory;
+        private WebApplicationFactory<Program> appFactory;
 
         public InMemoryApi()
         {
-            appFactory = new WebApplicationFactory<Startup>();
+            appFactory = new WebApplicationFactory<Program>();
         }
 
         public HttpClient CreateAnonymousClient()
@@ -35,7 +35,7 @@ namespace IaDnug.Testing.API
             return ConfigureAppFactory().CreateDefaultClient(new ClientAuthenticationHandler());
         }
 
-        private WebApplicationFactory<Startup> ConfigureAppFactory(string testsettingsFile = "appsettings.test.json")
+        private WebApplicationFactory<Program> ConfigureAppFactory(string testsettingsFile = "appsettings.test.json")
         {
             return appFactory.WithWebHostBuilder(builder => 
             {
