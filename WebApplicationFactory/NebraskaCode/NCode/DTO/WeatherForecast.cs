@@ -1,6 +1,6 @@
 using System;
 
-namespace IaDnug.DTO
+namespace NCode.DTO
 {
     public class WeatherForecast
     {

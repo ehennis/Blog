@@ -1,5 +1,5 @@
-﻿using IaDnug.DataStore;
-using IaDnug.Repository;
+﻿using NCode.DataStore;
+using NCode.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IaDnug.Testing
+namespace NCode.Testing
 {
     public class WeatherDataStoreInMemory : IDataStore
     {

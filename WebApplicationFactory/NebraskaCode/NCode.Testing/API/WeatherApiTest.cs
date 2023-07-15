@@ -1,4 +1,4 @@
-﻿using IaDnug.DTO;
+﻿using NCode.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace IaDnug.Testing.API
+namespace NCode.Testing.API
 {
     public class WeatherApiTest : IClassFixture<InMemoryApi>, IDisposable
     {

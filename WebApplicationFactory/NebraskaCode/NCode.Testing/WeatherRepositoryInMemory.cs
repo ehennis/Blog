@@ -1,12 +1,12 @@
-﻿using IaDnug.DTO;
-using IaDnug.Repository;
+﻿using NCode.DTO;
+using NCode.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IaDnug.Testing
+namespace NCode.Testing
 {
     public class WeatherRepositoryInMemory : IWeatherRepository
     {

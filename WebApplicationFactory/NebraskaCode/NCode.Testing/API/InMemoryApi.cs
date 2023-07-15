@@ -1,4 +1,4 @@
-﻿using IaDnug.DataStore;
+﻿using NCode.DataStore;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace IaDnug.Testing.API
+namespace NCode.Testing.API
 {
     public class InMemoryApi : IDisposable
     {
@@ -22,12 +22,13 @@ namespace IaDnug.Testing.API
 
         public InMemoryApi()
         {
-            appFactory = new WebApplicationFactory<Program>();
+            //appFactory = new WebApplicationFactory<NCode.Program>();
         }
 
         public HttpClient CreateAnonymousClient()
         {
-            return ConfigureAppFactory().CreateClient();
+            appFactory = ConfigureAppFactory();
+            return appFactory.CreateClient();
         }
 
         public HttpClient CreateAuthenticatedClient()
@@ -37,7 +38,8 @@ namespace IaDnug.Testing.API
 
         private WebApplicationFactory<Program> ConfigureAppFactory(string testsettingsFile = "appsettings.test.json")
         {
-            return appFactory.WithWebHostBuilder(builder => 
+            return new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder => 
             {
                 builder.ConfigureAppConfiguration( (hostContext, config) =>
                 {
@@ -66,7 +68,7 @@ namespace IaDnug.Testing.API
 
         public void Dispose()
         {
-            appFactory.Dispose();
+            if (appFactory != null) appFactory.Dispose();
         }
     }
 

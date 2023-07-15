@@ -1,5 +1,5 @@
-﻿using IaDnug.Service;
-using IaDnug.DTO;
+﻿using NCode.Service;
+using NCode.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IaDnug.Controllers
+namespace NCode.Controllers
 {
     [ApiController]
     [Route("[controller]")]

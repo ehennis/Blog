@@ -1,10 +1,8 @@
-﻿using IaDnug.DTO;
-using System;
+﻿using NCode.DTO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace IaDnug.Repository
+
+namespace NCode.Repository
 {
     public interface IWeatherRepository
     {

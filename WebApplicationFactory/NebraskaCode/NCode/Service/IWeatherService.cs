@@ -1,10 +1,10 @@
-﻿using IaDnug.DTO;
+﻿using NCode.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IaDnug.Service
+namespace NCode.Service
 {
     public interface IWeatherService
     {
