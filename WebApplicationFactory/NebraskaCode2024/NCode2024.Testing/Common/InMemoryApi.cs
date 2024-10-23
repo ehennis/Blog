@@ -53,7 +53,15 @@ namespace NCode2024.Testing.Common
 
                 builder.ConfigureServices(services =>
                 {
-                    //Will remove existing DB Context
+                    // Remove existing DbContext
+                    ServiceDescriptor? contextPermissionAnalytics =
+                        services.FirstOrDefault(desc => desc.ServiceType == typeof(WeatherDbContext));
+                    if (contextPermissionAnalytics != null)
+                    {
+                        services.Remove(contextPermissionAnalytics);
+                    }
+
+                    // Add In-Memory DbContext
                     services.AddDbContext<WeatherDbContext>(options =>
                     {
                         //From Microsoft.EntityFrameworkCore.InMemory library
