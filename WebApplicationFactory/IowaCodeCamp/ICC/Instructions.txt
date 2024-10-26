@@ -1,0 +1,11 @@
+1) Run WebAPI from swagger
+2) Testing Strategy 1: Fake/Mocks
+	a) FakeTests.cs: WeatherServiceFake and WeatherRepositoryFake and DataStoreFake
+3) Testing Strategy 2: Custom DbContext
+	a) CustomDbContext.cs: DataStoreInMemory
+4) Testing Strategy 3: WebApplicationFactory
+	a) BasicTests.cs
+5) Testing Strategy 4: IClassFixture<CustomWebApplicationFactory>
+	a) IndexPageTests.cs
+6) Testing Strategy 5: Custom Class
+	a) WeatherApiTests: InMemoryApi
